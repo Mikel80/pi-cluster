@@ -4,4 +4,4 @@ namespace: pipis
 resources:
   - ../../base/pipis
   - tunnel-token.yaml
-  - cloudeflare.yaml
+  - cloudflare.yaml
