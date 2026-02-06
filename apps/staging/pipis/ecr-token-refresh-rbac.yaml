@@ -1,0 +1,23 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ecr-token-refresh
+  namespace: pipis
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "create", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ecr-token-refresh
+  namespace: pipis
+subjects:
+  - kind: ServiceAccount
+    name: ecr-token-refresh
+    namespace: pipis
+roleRef:
+  kind: Role
+  name: ecr-token-refresh
+  apiGroup: rbac.authorization.k8s.io

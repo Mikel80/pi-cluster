@@ -5,3 +5,7 @@ resources:
   - ../../base/pipis
   - tunnel-token.yaml
   - cloudflare.yaml
+  - aws-credentials.yaml
+  - ecr-token-refresh-sa.yaml
+  - ecr-token-refresh-rbac.yaml
+  - ecr-token-refresh-cronjob.yaml

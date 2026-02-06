@@ -1,0 +1,54 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ecr-token-refresh
+  namespace: pipis
+spec:
+  schedule: "0 */11 * * *"
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: ecr-token-refresh
+          restartPolicy: OnFailure
+          initContainers:
+            - name: get-ecr-token
+              image: amazon/aws-cli:latest
+              envFrom:
+                - secretRef:
+                    name: aws-credentials
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  aws ecr get-login-password --region $AWS_REGION > /token/ecr-token
+                  echo "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com" > /token/ecr-registry
+              volumeMounts:
+                - name: token
+                  mountPath: /token
+          containers:
+            - name: create-secret
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  set -e
+                  ECR_TOKEN=$(cat /token/ecr-token)
+                  ECR_REGISTRY=$(cat /token/ecr-registry)
+
+                  kubectl delete secret ecr-registry-secret -n pipis --ignore-not-found
+                  kubectl create secret docker-registry ecr-registry-secret \
+                    -n pipis \
+                    --docker-server=$ECR_REGISTRY \
+                    --docker-username=AWS \
+                    --docker-password=$ECR_TOKEN
+              volumeMounts:
+                - name: token
+                  mountPath: /token
+          volumes:
+            - name: token
+              emptyDir: {}
