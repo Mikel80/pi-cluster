@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: 410445721302.dkr.ecr.mx-central-1.amazonaws.com/pipis-staging/frontend
+          image: pipis-staging/frontend:latest
           ports:
             - containerPort: 3030
         - imagePullSecrets:
