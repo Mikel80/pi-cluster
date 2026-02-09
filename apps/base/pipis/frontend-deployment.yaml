@@ -17,5 +17,5 @@ spec:
           image: pipis-staging/frontend:latest
           ports:
             - containerPort: 3030
-        - imagePullSecrets:
-          name: ecr-registry-secret 
+      imagePullSecrets:
+        - name: ecr-registry-secret 
