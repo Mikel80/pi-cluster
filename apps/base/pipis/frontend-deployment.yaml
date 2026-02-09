@@ -17,3 +17,5 @@ spec:
           image: 410445721302.dkr.ecr.mx-central-1.amazonaws.com/pipis-staging/frontend
           ports:
             - containerPort: 3030
+        - imagePullSecrets:
+          name: ecr-registry-secret 
