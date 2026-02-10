@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: cluster
+metadata:
+  name: pipis-cluster
+  namespace: pipis-db
+spec:
+  instances: 3
+
+  storage:
+    size: 1Gi
