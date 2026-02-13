@@ -4,7 +4,10 @@ metadata:
   name: frontend
 spec:
   ports:
-    - port: 9000
+    - name: http
+      protocol: TCP
+      port: 9000
+      targetPort: 80
   selector:
     app: frontend
   type: ClusterIP

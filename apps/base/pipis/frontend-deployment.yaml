@@ -18,8 +18,8 @@ spec:
         - name: frontend
           image: 410445721302.dkr.ecr.mx-central-1.amazonaws.com/pipis-staging/frontend
 
-          envFrom:
-            - configMapRef:
-              name: frontend-configmap
+          # envFrom:
+          #   - configMapRef:
+          #     name: frontend-configmap
           ports:
-            - containerPort: 3030
+            - containerPort: 80
