@@ -1,0 +1,8 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: atlas-operator-charts
+  namespace: pipis-db
+spec:
+  interval: 24h
+  url: oci://ghcr.io/ariga/charts/atlas-operator
