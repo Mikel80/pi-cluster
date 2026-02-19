@@ -14,10 +14,10 @@ spec:
     spec:
       imagePullSecrets:
         - name: ecr-registry-secret
-      securityContext:
-        fsGroup: 101
-        runAsUser: 101
-        runAsGroup: 101
+      # securityContext:
+      #   fsGroup: 101
+      #   runAsUser: 101
+      #   runAsGroup: 101
       containers:
         - name: frontend
           image: 410445721302.dkr.ecr.mx-central-1.amazonaws.com/pipis-staging/frontend
@@ -26,5 +26,5 @@ spec:
           #     name: frontend-configmap
           ports:
             - containerPort: 80
-          securityContext:
-            allowPrivilegeEscalation: false
+          # securityContext:
+          #   allowPrivilegeEscalation: false
