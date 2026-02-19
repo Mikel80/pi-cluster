@@ -5,6 +5,11 @@ metadata:
   namespace: pipis-db
 spec:
   instances: 3
-
   storage:
     size: 1Gi
+  # bootstrap:
+  #   initdb:
+  #     database: pipis-db
+  #     owner: appuser
+  #     secret:
+  #       name: appuser-secret
